@@ -1,5 +1,5 @@
 # Compute prevalence vs percentile for all exposures
-path="C:/Users/snagpal3/Dropbox (GaTech)/IBD/Canalization/"
+path="~/Dropbox (GaTech)/IBD/Canalization/"
 
 library(data.table)
 library(ggplot2)
@@ -45,23 +45,20 @@ for(k in cont){
         n=100
         df <- data.frame()
         for(i in 0:(n-1)){
-          print(i)
-          if(i == 0){
-            tot = table(pre_df$STATUS[which(pre_df$PRS >= quantile(pre_df$PRS, i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n))])/length(which(pre_df$PRS >= quantile(pre_df$PRS,i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n)))
-            dx = pre_df[which(pre_df$PRS >= quantile(pre_df$PRS, i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n)),] 
-            dx1 <- dx[dx$GROUP == t,]
-            
-          }
-          else {
-            tot = table(pre_df$STATUS[which(pre_df$PRS > quantile(pre_df$PRS, i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n))])/length(which(pre_df$PRS > quantile(pre_df$PRS,i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n)))
-            dx = pre_df[which(pre_df$PRS > quantile(pre_df$PRS, i/n) & pre_df$PRS <= quantile(pre_df$PRS, (i+1)/n)),]
-            dx1 <- dx[dx$GROUP == t,]
-          }
-          prev = data.frame(table(dx1$STATUS)/nrow(dx1))[2,2] * 100
-          if(is.na(prev)){prev = 0}
-          df2 = data.frame("PGS" = i+1, "Prev" = prev) 
-          df <- rbind(df, df2)
-          
+            print(i)
+            if(i == 0){
+                dx <- br_grs[br_grs$GROUP == t,]
+                dx1 <- dx[which(dx$invGRS >= quantile(dx$invGRS, i/n) & dx$invGRS <= quantile(dx$invGRS, (i+1)/n)),]
+            }
+            else {
+                dx <- br_grs[br_grs$GROUP == t,]
+                dx1 <- dx[which(dx$invGRS > quantile(dx$invGRS, i/n) & dx$invGRS <= quantile(dx$invGRS, (i+1)/n)),]
+            }
+            #prev = data.frame(table(dx1$STATUS)/nrow(dx1))[2,2] * 100
+            prev=table(dx1$STATUS)[2]/nrow(dx1)*100
+            if(is.na(prev)){prev = 0}
+            df2 = data.frame("PGS" = i+1, "Prev" = prev) 
+            df <- rbind(df, df2)
         }
         df$GROUP <- paste0(t)
         df$scaled <- scale(df$Prev, scale = F)
