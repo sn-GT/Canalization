@@ -1,15 +1,11 @@
-Canalization of the Polygenic Risk for Common Diseases and Traits in the UK Biobank Cohort (2021)
-Sini Nagpal and Greg Gibson
-School of Biological Sciences, Georgia Institute of Technology, Atlanta GA 0332, USA
+Canalization of the Polygenic Risk for Common Diseases and Traits in the UK Biobank Cohort, Molecular Biology and Evolution (2022).
+Sini Nagpal, Raghav Tandon, Greg Gibson
+Georgia Institute of Technology, Atlanta GA 0332, USA
+
+Paper: https://academic.oup.com/mbe/article/39/4/msac053/6547257
 
 Rshiny: https://canalization-gibsonlab.shinyapps.io/rshiny/
-The Rshiny has the details about the project in the Introduction section. 
-It contains results for canalization for 153 environmental expsorues and 9 complex traits of the UK Biobank at:
-- PRS p < 5e-08
-- PRS p < 1e-03
+We have developed an Rshiny to explore the models and results of this study:
+- Models tab contains details on the models developed for this work. 
+- PRSxE: Canalization vs Decanalization tab displays a table with our evaluation of PRSxE, canalization and decanalization. On clicking the table cells, you can view the prevalence of disease vs percentile PGS plots for 10 complex traits and 151 environmental exposures of the UK Biobank cohort. 
 
-By clicking on Yes/No on the table, you can view the plots for each environmental exposure and trait
-- A. Prevalence vs percentile PRS plots divided by high and low exposure groups
-- B. High minus low (H_L) curves
-- C. H-L curves mean centered
-- D. Derivative distribution of cubic curves for real data and random iterations. 
